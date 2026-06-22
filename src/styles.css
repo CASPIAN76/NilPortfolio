@@ -1,1 +1,305 @@
 /* You can add global styles to this file, and also import other style files */
+
+    :root {
+      --bg: #0a0e1a;
+      --surface: #111827;
+      --card: #141d2e;
+      --accent: #4f8ef7;
+      --accent2: #7c3aed;
+      --accent3: #06b6d4;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(79,142,247,0.15);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+    }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+ 
+    /* Animated gradient orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 0;
+      animation: orb-float 12s ease-in-out infinite;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #4f8ef7; top: -150px; left: -150px; animation-delay: 0s; }
+    .orb-2 { width: 400px; height: 400px; background: #7c3aed; bottom: 10%; right: -100px; animation-delay: -4s; }
+    .orb-3 { width: 300px; height: 300px; background: #06b6d4; top: 50%; left: 40%; animation-delay: -8s; }
+    @keyframes orb-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(20px, -30px) scale(1.05); }
+    }
+ 
+    /* Grid noise texture */
+    .noise-overlay {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 0h60v60H0z' fill='none'/%3E%3Cpath d='M0 0h1v1H0z' fill='rgba(255,255,255,0.018)'/%3E%3C/svg%3E");
+    }
+ 
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      backdrop-filter: blur(20px);
+      background: rgba(10,14,26,0.75);
+      border-bottom: 1px solid var(--border);
+    }
+ 
+    /* Scroll reveal */
+    .reveal {
+      opacity: 1;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+ 
+    /* Glowing card */
+    .glow-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .glow-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(79,142,247,0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .glow-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(79,142,247,0.4);
+      box-shadow: 0 20px 60px rgba(79,142,247,0.12);
+    }
+    .glow-card:hover::before { opacity: 1; }
+ 
+    /* Skill badge */
+    .skill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+      cursor: default;
+    }
+    .skill-badge:hover {
+      transform: scale(1.06);
+    }
+ 
+    /* Timeline dot pulse */
+    .timeline-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      position: relative;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .timeline-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+    @keyframes pulse-ring {
+      0% { opacity: 0.6; transform: scale(1); }
+      100% { opacity: 0; transform: scale(2.2); }
+    }
+ 
+    /* Hero typing cursor */
+    .cursor-blink {
+      display: inline-block;
+      width: 3px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 3px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+ 
+    /* Progress bar for skills */
+    .skill-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+ 
+    /* Section divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+ 
+    /* Gradient text */
+    .grad-text {
+      background: linear-gradient(135deg, #4f8ef7 0%, #7c3aed 50%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+ 
+    /* Active nav indicator */
+    .nav-link {
+      position: relative;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+ 
+    /* Tag */
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(79,142,247,0.1);
+      border: 1px solid rgba(79,142,247,0.2);
+      border-radius: 4px;
+      padding: 3px 8px;
+    }
+ 
+    /* Floating code snippet decoration */
+    .code-deco {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: rgba(100,116,139,0.4);
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+    }
+ 
+    /* Contact pill button */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+    .pill-btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+    }
+    .pill-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(79,142,247,0.4);
+    }
+    .pill-btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+    }
+    .pill-btn-outline:hover {
+      background: rgba(79,142,247,0.08);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+ 
+    /* Section label */
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-eyebrow::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: var(--accent);
+      display: inline-block;
+    }
+ 
+    /* Stagger animation for badges */
+    @keyframes badge-in {
+      from { opacity: 0; transform: scale(0.8) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .badge-animate {
+      animation: badge-in 0.4s ease forwards;
+      opacity: 0;
+    }
+ 
+    /* Project tech chip */
+    .tech-chip {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+ 
+    /* Avatar ring animation */
+    .avatar-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, #4f8ef7, #7c3aed, #06b6d4) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: spin-slow 6s linear infinite;
+    }
+    @keyframes spin-slow { to { transform: rotate(360deg); } }
+ 
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(79,142,247,0.3); border-radius: 3px; }
+ 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
