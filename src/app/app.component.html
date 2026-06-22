@@ -17,7 +17,7 @@
       <a (click)="scrollToSection('projects')" class="nav-link">Projects</a>
       <a (click)="scrollToSection('contact')" class="nav-link">Contact</a>
     </div>
-    <a href="mailto:thakren76&#64;gmail.com" class="pill-btn pill-btn-primary text-sm py-2 px-5">Hire Me</a>
+    <a href="mailto:thakren76&#64;gmail.com" class="pill-btn pill-btn-primary text-sm py-2 px-5" (click)="download()">Download Resume</a>
   </div>
 </nav>
  
@@ -79,7 +79,7 @@ const dev = {{'{'}}
         <div class="relative w-64 h-64">
           <div class="avatar-ring"></div>
           <div class="w-full h-full rounded-full flex items-center justify-center text-7xl font-bold grad-text select-none" style="background:var(--card); border:1px solid var(--border);">
-            NT
+            <img src="icon.png" class="rounded-full" />
           </div>
           <!-- Floating chips -->
           <div class="absolute -top-4 -right-6 glow-card px-3 py-2 text-xs font-medium" style="border-radius:10px;background:var(--surface);">
@@ -402,7 +402,7 @@ const dev = {{'{'}}
     </div>
  
     <div class="flex flex-wrap justify-center gap-4 reveal">
-      <a href="mailto:thakren76&#64;gmail.com" class="pill-btn pill-btn-primary">
+      <a  class="pill-btn pill-btn-primary"  (click)="sendMail()">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
         Send Email
       </a>

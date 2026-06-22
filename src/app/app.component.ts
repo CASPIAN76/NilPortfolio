@@ -118,4 +118,20 @@ scrollToSection(id: string): void {
     });
   }
 }
+
+ 
+download() {
+  const link = document.createElement('a');
+
+  link.href = 'Nilesh.pdf';
+  link.download = 'Nilesh Resume.pdf';
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+sendMail(): void {
+  window.location.href = 'mailto:thakren76@gmail.com';
+}
 }
