@@ -7,7 +7,7 @@
       --accent: #4f8ef7;
       --accent2: #7c3aed;
       --accent3: #06b6d4;
-      --text: #e2e8f0;
+      --text: #fff;
       --muted: #64748b;
       --border: rgba(79,142,247,0.15);
     }
@@ -172,7 +172,7 @@
       color: var(--muted);
       transition: color 0.2s;
     }
-    .nav-link:hover { color: var(--text); }
+    .nav-link:hover { color: var(--text); cursor: pointer; }
     .nav-link::after {
       content: '';
       position: absolute;
